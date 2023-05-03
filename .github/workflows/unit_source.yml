@@ -92,6 +92,11 @@ jobs:
         with:
           source_path: ${{ env.source_directory }}
 
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ inputs.collection_pre_install }}
+        run: echo "value is $JOB_CONTEXT"
+
       - name: Pre install collections dependencies first so the collection install does not
         run: ansible-galaxy collection install --pre ${{ inputs.collection_pre_install }} -p /home/runner/collections
         if: inputs.collection_pre_install != ''
